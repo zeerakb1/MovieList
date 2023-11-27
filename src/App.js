@@ -2,29 +2,17 @@ import "./App.css";
 import { useEffect, useState } from "react";
 import SearchIcon from "./search.svg";
 import MovieCard from "./MovieCard";
-// require('dotenv').config();
 
-// db474f2
+const OMDB_API_URL = 'http://www.omdbapi.com/'
+const OMDB_API_KEY = process.env.REACT_APP_OMDB_API_KEY
 
-const OMDB_API_URL = process.env.REACT_APP_OMDB_API_URL
-// const OMDB_API_URL = "http://www.omdbapi.com/?apikey=db474f2";
-
-// const movie1 = {
-//   Title: "Italian Spiderman",
-//   Year: "2007",
-//   imdbID: "tt2705436",
-//   Type: "movie",
-//   // "Poster": "N/A",
-//   Poster:
-//     "https://m.media-amazon.com/images/M/MV5BZWQxMjcwNjItZjI0ZC00ZTc4LWIwMzItM2Q0YTZhNzI3NzdlXkEyXkFqcGdeQXVyMTA0MTM5NjI2._V1_SX300.jpg",
-// };
 
 function App() {
   const [movies, setMovies] = useState([]);
   const [title, setTitle] = useState("");
 
   const searchMovies = async (title) => {
-    const response = await fetch(`${OMDB_API_URL}&s=${title}`);
+    const response = await fetch(`${OMDB_API_URL}?apikey=${OMDB_API_KEY}&s=${title}`);
     const data = await response.json();
     setMovies(data.Search);
 
